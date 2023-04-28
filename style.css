@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+* {
+    /* box-sizing: inherit; */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #5e6b7e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
+
+.screen {
+    background-color: #283345;
+    width: 350px;
+    height: 500px;
+    border-radius: 25px;
+    box-shadow: 15px 15px 15px #475363;
+    padding: 30px 20px 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #f8ffff;
+}
+
+.result {
+    /* background-color: red; */
+    height: 75px;
+    font-size: 50px;
+    text-align: right;
+}
+.calc {
+    /* background-color: green; */
+}
+
+.calc__row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
+.calc__button {
+    font-size: 30px;
+    font-family: inherit;
+    background-color: #283345;
+    color: inherit;
+    border: none;
+    border-radius: 20px;
+    box-shadow: -3px -3px 8px #30384b, 3px 3px 8px #1d2538;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc__button img {
+    width: 40px;
+}
+
+.calc__button_long {
+    width: 163px;
+}
+
+.calc__button_theme_colorful {
+    color: #dd9235;
+}
+
+.calc__button_theme_pale {
+    color: #8e97a6;
+}
