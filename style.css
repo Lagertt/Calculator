@@ -98,6 +98,9 @@ body {
         width: 65px;
         height: 65px;
     }
+    .calc__button:hover {
+        background-color: #283345;
+    }
     .calc__button_long {
         width: 143px;
     }
