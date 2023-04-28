@@ -84,7 +84,6 @@ body {
 @media (max-width: 470px) {
     .screen {
         width: 300px;
-        background-color: red;
     }
     .calc__button {
         width: 65px;
