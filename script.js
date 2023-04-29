@@ -78,6 +78,8 @@ function Calculate(a, b, sign) {
 }
 
 const ChooseAction = (symbol) => {
+    window.navigator.vibrate(200);
+
     switch (symbol) {
         case '+':
         case '−':
@@ -113,10 +115,9 @@ const ChooseAction = (symbol) => {
 const init = () => {
     const btns = document.querySelectorAll('.calc__button');
     for (let btn of btns) {
-        btn.addEventListener('click', () => {
-            window.navigator.vibrate(200);
-            ChooseAction(btn.textContent.trim());
-        });
+        btn.addEventListener('click', () =>
+            ChooseAction(btn.textContent.trim())
+        );
     }
 };
 
