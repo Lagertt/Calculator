@@ -64,7 +64,7 @@ function Calculate(a, b, sign) {
         case '+':
             fstNumb = MathOp.Sum(a, b);
             break;
-        case '−':
+        case '-':
             fstNumb = MathOp.Substract(a, b);
             break;
         case '÷':
@@ -82,7 +82,7 @@ const ChooseAction = (symbol) => {
 
     switch (symbol) {
         case '+':
-        case '−':
+        case '-':
         case '×':
         case '÷':
             out.textContent = symbol;
