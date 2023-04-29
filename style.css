@@ -45,6 +45,7 @@ body {
 
 .calc__button {
     font-size: 30px;
+    cursor: pointer;
     font-family: inherit;
     background-color: #283345;
     color: inherit;
