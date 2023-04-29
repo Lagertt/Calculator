@@ -13,6 +13,16 @@ const MathOp = {
     Substract: (a, b) => a - b,
 };
 
+function Percent() {
+    if (sign === '') {
+        fstNumb /= 100;
+        ChangeOut(fstNumb);
+    } else {
+        sndNumb = (sndNumb * fstNumb) / 100;
+        ChangeOut(sndNumb);
+    }
+}
+
 function ChangeOut(outputStr) {
     out.textContent = outputStr;
     if (sign === '') fstNumb = outputStr;
@@ -78,8 +88,6 @@ function Calculate(a, b, sign) {
 }
 
 const ChooseAction = (symbol) => {
-    window.navigator.vibrate(200);
-
     switch (symbol) {
         case '+':
         case '-':
@@ -105,6 +113,9 @@ const ChooseAction = (symbol) => {
             break;
         case '.':
             AddPoint();
+            break;
+        case '%':
+            Percent();
             break;
         default:
             AddNumber(symbol);
