@@ -1,8 +1,13 @@
-const out = document.querySelector('.result');
-let fstNumb = '0'; //первое число
+const out = document.querySelector('.result'); // отображаемое значение на странице
+let fstNumb = '0'; // первое число
 let sndNumb = ''; // второе число
-let sign = '';
+let sign = ''; // знак
 
+////////////////////////////////////////
+///////////////MATH/////////////////////
+////////////////////////////////////////
+
+// массив функций мат.операций
 const MathOp = {
     Multiply: (a, b) => a * b,
     Division: (a, b) => {
@@ -13,62 +18,7 @@ const MathOp = {
     Substract: (a, b) => a - b,
 };
 
-function Percent() {
-    if (sign === '') {
-        fstNumb /= 100;
-        ChangeOut(fstNumb);
-    } else {
-        sndNumb = (sndNumb * fstNumb) / 100;
-        ChangeOut(sndNumb);
-    }
-}
-
-function ChangeOut(outputStr) {
-    out.textContent = outputStr;
-    if (sign === '') fstNumb = outputStr;
-    else sndNumb = outputStr;
-}
-
-function Clear() {
-    fstNumb = '0';
-    sndNumb = '';
-    sign = '';
-    out.textContent = fstNumb;
-}
-
-function Backspace() {
-    let outputStr = out.textContent;
-    if (out.textContent.length === 1) {
-        outputStr = '0';
-    } else {
-        outputStr = outputStr.slice(0, -1);
-    }
-
-    ChangeOut(outputStr);
-}
-
-function AddPoint() {
-    let outputStr = out.textContent;
-    if (outputStr === '0' || !Number(outputStr)) {
-        outputStr = '0.';
-    } else if (!outputStr.includes('.')) {
-        outputStr += '.';
-    }
-
-    ChangeOut(outputStr);
-}
-
-function AddNumber(symbol) {
-    let outputStr = out.textContent;
-    if (outputStr === '0' || (!Number(outputStr) && outputStr !== '0.')) {
-        outputStr = symbol;
-    } else {
-        outputStr += symbol;
-    }
-
-    ChangeOut(outputStr);
-}
-
+// функция возвращает результат sign для чисел a и b
 function Calculate(a, b, sign) {
     switch (sign) {
         case '+':
@@ -87,29 +37,112 @@ function Calculate(a, b, sign) {
     out.textContent = String(fstNumb);
 }
 
+// функция считает процент
+function Percent() {
+    // если это первое число
+    if (sign === '') {
+        fstNumb /= 100;
+        ChangeOut(fstNumb);
+    }
+    // если второе
+    else {
+        sndNumb = (sndNumb * fstNumb) / 100; // считаем процент этого числа от первого (100 + 4% от 100)
+        ChangeOut(sndNumb);
+    }
+}
+
+////////////////////////////////////////
+///////////////OUTPUT///////////////////
+////////////////////////////////////////
+
+// функция меняет отображаемое значение на странице и заносит прошлое значение в соответствующую переменную
+function ChangeOut(outputStr) {
+    out.textContent = outputStr;
+
+    // если знак ещё не был введён, то записываем в первое число
+    if (sign === '') fstNumb = outputStr;
+    else sndNumb = outputStr; // иначе во второе
+}
+
+// функция очищает все переменные и отображаемое значение
+function Clear() {
+    fstNumb = '0';
+    sndNumb = '';
+    sign = '';
+    out.textContent = fstNumb;
+}
+
+// функция убирает последний введённый символ
+function Backspace() {
+    let outputStr = out.textContent;
+    // если в строке один символ
+    if (out.textContent.length === 1) {
+        outputStr = '0'; // заменяем его на 0
+    } else {
+        outputStr = outputStr.slice(0, -1); // убираем последний символ в строке
+    }
+
+    ChangeOut(outputStr);
+}
+
+// функция добавляет точку к строке
+function AddPoint() {
+    let outputStr = out.textContent;
+    // если в строке сейчас 0, либо знак
+    if (outputStr === '0' || !Number(outputStr)) {
+        outputStr = '0.'; // дописать к точке дополнительно 0 в начале
+    } else if (!outputStr.includes('.')) {
+        // если в строке ещё нет точки
+        outputStr += '.';
+    }
+
+    ChangeOut(outputStr);
+}
+
+// функция добавляет новую цифру к строке
+function AddNumber(symbol) {
+    let outputStr = out.textContent;
+    // если в строке сейчас 0, либо знак
+    if (outputStr === '0' || (!Number(outputStr) && outputStr !== '0.')) {
+        outputStr = symbol; // перезаписываем значение строки на принятый символ
+    } else {
+        outputStr += symbol; // иначе добавляем к строке символ
+    }
+
+    ChangeOut(outputStr);
+}
+
+////////////////////////////////////////
+///////////////MAIN/////////////////////
+////////////////////////////////////////
+
+// функция в зависимости от принятого сивола запускает те или иные действия
 const ChooseAction = (symbol) => {
     switch (symbol) {
         case '+':
         case '-':
         case '×':
         case '÷':
-            out.textContent = symbol;
-            sign = symbol;
+            // если передан символ мат. операций
+            out.textContent = symbol; //заменяем отображаемое значение на принятый символ
+            sign = symbol; // сохраняем его
             break;
         case '=':
+            // если числа не NaN
             if (fstNumb && sndNumb) {
                 Calculate(Number(fstNumb), Number(sndNumb), sign);
             } else {
                 fstNumb = sndNumb;
             }
             ChangeOut(fstNumb);
-            sign = '';
+            sign = ''; // сбрасываем знак
             break;
         case 'C':
             Clear();
             break;
         case '':
-            Backspace();
+            // не применять backspace на знаках
+            if (sign === '' || sndNumb !== '') Backspace();
             break;
         case '.':
             AddPoint();
@@ -124,10 +157,13 @@ const ChooseAction = (symbol) => {
 };
 
 const init = () => {
-    const btns = document.querySelectorAll('.calc__button');
+    const btns = document.querySelectorAll('.calc__button'); //полчучаем псевдомассив всех кнопок
     for (let btn of btns) {
-        btn.addEventListener('click', () =>
-            ChooseAction(btn.textContent.trim())
+        btn.addEventListener(
+            'click',
+            () =>
+                //весим функцию на клик по каждой кнопке
+                ChooseAction(btn.textContent.trim()) //в функцию передаём текстовое значение блока с убранными пробелами
         );
     }
 };
