@@ -146,6 +146,7 @@ body {
     width: 60px;
     height: 34px;
     margin-bottom: 20px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .switch input {
