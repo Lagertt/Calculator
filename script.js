@@ -156,6 +156,11 @@ const ChooseAction = (symbol) => {
     }
 };
 
+function SwitchTheme() {
+    let screen = document.querySelector('.screen');
+    screen.classList.toggle('theme-light');
+}
+
 const init = () => {
     const btns = document.querySelectorAll('.calc__button'); //полчучаем псевдомассив всех кнопок
     for (let btn of btns) {
@@ -166,6 +171,9 @@ const init = () => {
                 ChooseAction(btn.textContent.trim()) //в функцию передаём текстовое значение блока с убранными пробелами
         );
     }
+
+    const btnTheme = document.querySelector('input');
+    btnTheme.addEventListener('change', SwitchTheme);
 };
 
 init();
