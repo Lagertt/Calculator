@@ -57,7 +57,7 @@ function Percent() {
 
 // функция меняет отображаемое значение на странице и заносит прошлое значение в соответствующую переменную
 function ChangeOut(outputStr) {
-  if (Number(outputStr) < Number.MAX_SAFE_INTEGER) {
+  if (Number(outputStr) < Number.MAX_SAFE_INTEGER && Number(outputStr) > Number.MIN_SAFE_INTEGER) {
     if (outputStr.length > 12) out.style.fontSize = '40px';
     else out.style.fontSize = '50px';
     out.textContent = outputStr;
