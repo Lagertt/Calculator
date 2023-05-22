@@ -1,5 +1,5 @@
 # Calculator <img src="img/calculator.ico" width="40" style="margin-left:10px">
-<img src="img/preview.png" height="500">
+<img src="img/preview.png" width="100%">
 
 [Ссылка на деплой](https://lagertt.github.io/Calculator/)
 
